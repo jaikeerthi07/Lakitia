@@ -1,0 +1,30 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "lakotia/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "build"
+            }
+        },
+        {
+            "src": "newlakhotiabackend/run.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "newlakhotiabackend/run.py"
+        },
+        {
+            "src": "/uploads/(.*)",
+            "dest": "newlakhotiabackend/run.py"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "lakotia/$1"
+        }
+    ]
+}
